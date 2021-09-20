@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    
+ 
     public class Customer
     {
         string customerName = Console.ReadLine();
@@ -26,6 +26,7 @@ namespace Models
 
         public Customer(string name, int age, string city) : this(name, age)
         {
+
         }
 
         //Property
