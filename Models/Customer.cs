@@ -1,42 +1,25 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Models
 {
- 
     public class Customer
     {
-        string customerName = Console.ReadLine();
-
-        public Customer() { }
-
-        //Constructor overloading (this is an example of polymorphism)
-        //The constructor behaves differently
-        //depending on what is passed in
-        public Customer(string name) : this()
+        public Customer(string name)
         {
             this.Name = name;
         }
+        public Customer() {}
 
-        //constructor chaining
-        public Customer(string name, int age) : this(name)
+        public string Name {get; set;}
+
+        public int Id {get ; set ;}
+
+        public override string ToString()
         {
-            this.Age = age;
+            return $"Username: {this.Name} Id: {Id}";
         }
-
-        public Customer(string name, int age, string city) : this(name, age)
-        {
-
-        }
-
-        //Property
-        public string Name { get; set; }
-
-        public int Age { get; set; }
-
-        public string City { get; set; }
-
-        public List<Order> Orders { get; set; }
-        
     }
 }

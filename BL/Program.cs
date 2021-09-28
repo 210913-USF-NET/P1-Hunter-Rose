@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace UI
+namespace BL
 {
     class Program
     {
         static void Main(string[] args)
         {
-            new MainMenu().start();
+            
         }
     }
 }

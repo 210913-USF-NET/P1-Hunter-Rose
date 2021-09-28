@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Models;
 
-namespace UI
+namespace BL
 {
-    public interface IMenu
+    public interface IBL
     {
-        void Start();
-
+        List<Stores> SearchStore(string quertStr);
     }
 }
