@@ -17,6 +17,11 @@ namespace DL
         _context = context;
     }
         public DBRepo(){}
+        /// <summary>
+        /// uploads customer username that user created to the database
+        /// </summary>
+        /// <param name="newCustomer"></param>
+        /// <returns></returns>
         public Model.Customer createCustomer(Model.Customer newCustomer)
         {
             Entity.Customer toAdd = new Entity.Customer();
@@ -25,6 +30,11 @@ namespace DL
             _context.SaveChanges();
             return newCustomer;
         }
+        /// <summary>
+        /// uploads the quantity of the product they selected when purchasing
+        /// </summary>
+        /// <param name="howMany"></param>
+        /// <returns></returns>
         public Model.LineItem CreateNewLineItem(Model.LineItem howMany)
         {
             Entity.LineItem toAdd = new Entity.LineItem();
@@ -36,7 +46,11 @@ namespace DL
             howMany.Id = toAdd.Id;
             return howMany;
         }
-
+        /// <summary>
+        /// searches customer username to make sure they're in the database
+        /// </summary>
+        /// <param name="searchCustomer"></param>
+        /// <returns></returns>
         public Model.Customer SearchCustomer(string searchCustomer)
         {
           Entity.Customer foundCustomer = _context.Customers.FirstOrDefault(customer => customer.Username == searchCustomer); 
@@ -52,6 +66,11 @@ namespace DL
                 return null;
             }
         }
+        /// <summary>
+        /// creates a new order id when customer is purchasing items so the store can track it
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public Model.OrderDetails CreateNewOrder(Models.OrderDetails order)
         {
             Entity.Orderitem toAdd = new Entity.Orderitem();
@@ -63,7 +82,10 @@ namespace DL
             order.Id = toAdd.Id;
             return order;
         }
-
+        /// <summary>
+        /// lists store's name and location
+        /// </summary>
+        /// <returns></returns>
         public List <Models.Stores> StoreLocation()
         {
              return _context.Stores.Select(
@@ -76,6 +98,10 @@ namespace DL
             ).ToList();
 
         }
+        /// <summary>
+        /// list of customers
+        /// </summary>
+        /// <returns></returns>
         public List <Models.Customer> ListOfCustomers()
         {
             return _context.Customers.Select(
@@ -85,6 +111,10 @@ namespace DL
                 }
             ).ToList();
         }
+        /// <summary>
+        /// list of orders
+        /// </summary>
+        /// <returns></returns>
         public List <Models.OrderDetails> OrderHistory()
         {
             return _context.Orderitems.Where(order => order.StoresId == Models.CurrentContext.CurrentStoreId).Select(Orderhistory => new Model.OrderDetails(){
@@ -95,6 +125,10 @@ namespace DL
                 }
             ).ToList();
         }
+        /// <summary>
+        /// list of inventories in stores
+        /// </summary>
+        /// <returns></returns>
         public List<Models.Inventory> GetInventory()
         {
             return _context.Inventories.Where(order => order.StoresId == Models.CurrentContext.CurrentStoreId).Select(Orderhistory => new Model.Inventory(){
@@ -106,6 +140,11 @@ namespace DL
                 }
             ).ToList();
         }
+        /// <summary>
+        /// updates store's inventory when a purchase is made or when a manager modifies the quantity of a product
+        /// </summary>
+        /// <param name="quantity"></param>
+        /// <returns></returns>
         public Models.Inventory UpdateInventory(Models.Inventory quantity)
         {
             Entity.Inventory toAdd = new Entity.Inventory();
@@ -119,6 +158,10 @@ namespace DL
             _context.ChangeTracker.Clear();
             return quantity;
         }
+        /// <summary>
+        /// list of customer orders
+        /// </summary>
+        /// <returns></returns>
         public List<Models.OrderDetails> CustomerOrderHistory()
         {
              return _context.Orderitems.Where(order => order.CustomerId == Models.CurrentContext.CurrentCustomerId).Select(Orderhistory => new Model.OrderDetails(){
@@ -129,7 +172,11 @@ namespace DL
                 }
             ).ToList();
         }
-
+        /// <summary>
+        /// product id, quantity, and order id when a purchase is being made
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public Model.LineItem CheckOutList(Models.LineItem item)
         {
             Entity.LineItem toAdd = new Entity.LineItem();
@@ -141,6 +188,11 @@ namespace DL
             item.Id = toAdd.Id;
             return item;
         }
+        /// <summary>
+        /// lists quantity of products
+        /// </summary>
+        /// <param name="quantity"></param>
+        /// <returns></returns>
         public Models.Inventory WhatsInStock(Models.Inventory quantity)
         {
             Entity.Inventory toAdd = new Entity.Inventory();
@@ -153,7 +205,10 @@ namespace DL
             quantity.Id = toAdd.Id;
             return quantity;
         }
-        
+        /// <summary>
+        /// list of products
+        /// </summary>
+        /// <returns></returns>
 
         public List<Models.Product> ListOfProducts()
         {

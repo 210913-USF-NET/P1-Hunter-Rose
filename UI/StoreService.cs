@@ -8,7 +8,13 @@ namespace UI
 {
     public class StoreService
     {
-        public Stores SelectAStore(string prompt, List<Stores> listToPick)
+        /// <summary>
+        /// Lists all the stores and locations available then asks the user to select one
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <param name="listToPick"></param>
+        /// <returns></returns>
+            public Stores SelectAStore(string prompt, List<Stores> listToPick)
         {
             selectStore:
             Console.WriteLine(prompt);

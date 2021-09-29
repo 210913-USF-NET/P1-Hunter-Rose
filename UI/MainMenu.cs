@@ -13,6 +13,9 @@ namespace UI
 {
     public class MainMenu
     {
+        /// <summary>
+        /// Starts main menu prompt. If user has not signed in before, they will be prompted to create a username.
+        /// </summary>
         public void start()
         {
             Signin:

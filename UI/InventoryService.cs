@@ -8,6 +8,12 @@ namespace UI
 {
     public class InventoryService
     {
+        /// <summary>
+        /// lists the inventory of the store
+        /// </summary>
+        /// <param name="prompt"></param>
+        /// <param name="listToPick"></param>
+        /// <returns></returns>
          public Inventory SelectAnInventory(string prompt, List<Inventory> listToPick)
         {
             selectCustomer:
@@ -33,6 +39,12 @@ namespace UI
                 goto selectCustomer;
             }
         }
+        /// <summary>
+        /// this method will select the id of a store when passed an int parameter
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="listToPick"></param>
+        /// <returns></returns>
         public Inventory SelectAnInventory1(int id, List<Inventory> listToPick)
         {
             for (int i = 0; i < listToPick.Count; i++)

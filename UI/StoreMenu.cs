@@ -38,7 +38,9 @@ namespace UI
             _repo = new DBRepo(context);
         }
 
-        
+        /// <summary>
+        /// shows user the options of the app. From this menu they can access the following listed below.
+        /// </summary>
         public void StoreMenu1()
         {
             selectanotheroption:
@@ -282,6 +284,9 @@ namespace UI
                 goto selectanotheroption;
             }
         }
+        /// <summary>
+        /// Lists the current products at the store and asks the user if they would like to purchase
+        /// </summary>
         public void PlaceAnOrder()
         {
             Console.WriteLine("\n");
@@ -319,6 +324,9 @@ namespace UI
                 goto cartoptions;
             }
         }
+        /// <summary>
+        /// Prompts user to add a product to their cart and the quantity of the product
+        /// </summary>
         public void cartInventory()
         {
                 buyProduct:
