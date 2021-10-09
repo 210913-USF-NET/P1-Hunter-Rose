@@ -52,6 +52,23 @@ namespace Tests
             Assert.Equal(id, test.Id);
         }
         [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        [InlineData(5)]
+        [InlineData(6)]
+        [InlineData(7)]
+        [InlineData(8)]
+        [InlineData(9)]
+        public void InventoryQuantity(int quantity)
+        {
+            Inventory test = new Models.Inventory();
+            Assert.NotNull(test);
+            test.Quantity = quantity;
+            Assert.Equal(quantity, test.Quantity);
+        }
+        [Theory]
         [InlineData(4)]
         [InlineData(5)]
         [InlineData(6)]
