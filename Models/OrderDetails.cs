@@ -10,11 +10,11 @@ namespace Models
         public OrderDetails(){}
         
         public int Id {get; set;}
-        public int? CustomerId {get; set;}
+        public int CustomerId {get; set;}
 
-        public int? StoreId {get; set;}
+        public int StoreId {get; set;}
 
-        public DateTime? Date {get ; set;}
+        public DateTime Date {get ; set;}
 
         public override string ToString()
         {

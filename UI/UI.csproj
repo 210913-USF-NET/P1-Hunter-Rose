@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj" />
-    <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\StoreBL\StoreBL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

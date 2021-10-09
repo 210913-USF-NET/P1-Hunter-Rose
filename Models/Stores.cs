@@ -8,14 +8,17 @@ namespace Models
     public class Stores
     {
         public Stores(){}
+
+        public Stores(int id) : this()
+        {
+            this.Id = id;
+        }
         public string Name {get; set;}
 
         public string Location {get; set;}
 
         public int Id {get; set;}
-        public int StoresId {get; set;}
 
-      
 
         public override string ToString()
         {

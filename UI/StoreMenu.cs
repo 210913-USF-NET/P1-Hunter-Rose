@@ -349,6 +349,11 @@ namespace UI
                     Console.WriteLine("invalid input");
                     goto buyProduct;
                 }
+                else if (cartinput == 0)
+                {
+                    Console.WriteLine("invalid input");
+                    goto buyProduct;
+                }
                 quantity:
                 Models.LineItem newItem = new Models.LineItem();
                 newItem.OrderitemsId = Models.CurrentContext.CurrentOrderId;

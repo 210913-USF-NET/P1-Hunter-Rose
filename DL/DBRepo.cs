@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Entity = DL.Entities;
-using Model = Models;
+//using Entity = DL.Entities;
+using Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DL
 {
     public class DBRepo : IRepo
     {
-        private Entity.RestaurantDBContext _context;
+        private HFMPBDBContext _context;
 
-        public DBRepo(Entity.RestaurantDBContext context)
+        public DBRepo(HFMPBDBContext context)
     {
         _context = context;
     }
@@ -22,25 +22,29 @@ namespace DL
         /// </summary>
         /// <param name="newCustomer"></param>
         /// <returns></returns>
-        public Model.Customer createCustomer(Model.Customer newCustomer)
+        public Customer createCustomer(Customer newCustomer)
         {
-            Entity.Customer toAdd = new Entity.Customer();
-            toAdd.Username = newCustomer.Name;
-            _context.Customers.Add(toAdd);
+            newCustomer = _context.Add(newCustomer).Entity;
             _context.SaveChanges();
             return newCustomer;
+        }
+        public void RemoveCustomer(int id)
+        {
+            _context.Customers.Remove(GetOneCustomerById(id));
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
         }
         /// <summary>
         /// uploads the quantity of the product they selected when purchasing
         /// </summary>
         /// <param name="howMany"></param>
         /// <returns></returns>
-        public Model.LineItem CreateNewLineItem(Model.LineItem howMany)
+        public LineItem CreateNewLineItem(LineItem howMany)
         {
-            Entity.LineItem toAdd = new Entity.LineItem();
+            LineItem toAdd = new LineItem();
             toAdd.Quantity = howMany.Quantity;
             toAdd.OrderitemsId = howMany.OrderitemsId;
-            toAdd.ProductId = howMany.ProductId;
+            toAdd.Product = howMany.Product;
             toAdd = _context.LineItems.Add(toAdd).Entity;
             _context.SaveChanges();
             howMany.Id = toAdd.Id;
@@ -51,33 +55,34 @@ namespace DL
         /// </summary>
         /// <param name="searchCustomer"></param>
         /// <returns></returns>
-        public Model.Customer SearchCustomer(string searchCustomer)
+        public Customer SearchCustomer(Customer customer)
         {
-          Entity.Customer foundCustomer = _context.Customers.FirstOrDefault(customer => customer.Username == searchCustomer); 
-          if(foundCustomer != null)
+            List<Customer> customerList = ListOfCustomers();
+            for (int i = 0; i < customerList.Count; i++)
             {
-                return new Model.Customer {
-                    Name = foundCustomer.Username,
-                    Id = foundCustomer.Id
+                if (customer.Name == customerList[i].Name)
+                {
+                    return new Customer
+                    {
+                        Name = customerList[i].Name,
+                        Id = customerList[i].Id
                     };
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
         /// <summary>
         /// creates a new order id when customer is purchasing items so the store can track it
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
-        public Model.OrderDetails CreateNewOrder(Models.OrderDetails order)
+        public OrderDetails CreateNewOrder(OrderDetails order)
         {
-            Entity.Orderitem toAdd = new Entity.Orderitem();
+            OrderDetails toAdd = new OrderDetails();
             toAdd.CustomerId = order.CustomerId;
-            toAdd.StoresId = order.StoreId;
-            toAdd.Date = order.Date;
-            toAdd = _context.Orderitems.Add(toAdd).Entity;
+            toAdd.StoreId = order.StoreId;
+            toAdd.Date = DateTime.Now;
+            _context.Orderitems.Add(toAdd);
             _context.SaveChanges();
             order.Id = toAdd.Id;
             return order;
@@ -86,27 +91,40 @@ namespace DL
         /// lists store's name and location
         /// </summary>
         /// <returns></returns>
-        public List <Models.Stores> StoreLocation()
+        public List <Stores> StoreLocation()
         {
              return _context.Stores.Select(
-                Stores => new Model.Stores() {
+                Stores => new Stores() {
     
-                    Name = Stores.StoreName,
+                    Name = Stores.Name,
                     Location = Stores.Location,
                     Id = Stores.Id
                 }
             ).ToList();
 
         }
+        public Stores GetOneStoreById(int id)
+        {
+            return _context.Stores
+                .AsNoTracking()
+                .FirstOrDefault(r => r.Id == id);
+        }
+        public Stores createStore(Stores newStore)
+        {
+            newStore = _context.Add(newStore).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+            return newStore;
+        }
         /// <summary>
         /// list of customers
         /// </summary>
         /// <returns></returns>
-        public List <Models.Customer> ListOfCustomers()
+        public List <Customer> ListOfCustomers()
         {
             return _context.Customers.Select(
-                Customerz => new Model.Customer(){
-                    Name = Customerz.Username,
+                Customerz => new Customer(){
+                    Name = Customerz.Name,
                     Id = Customerz.Id
                 }
             ).ToList();
@@ -115,28 +133,83 @@ namespace DL
         /// list of orders
         /// </summary>
         /// <returns></returns>
-        public List <Models.OrderDetails> OrderHistory()
+        public Customer UpdateCustomer(Customer customerToUpdate)
         {
-            return _context.Orderitems.Where(order => order.StoresId == Models.CurrentContext.CurrentStoreId).Select(Orderhistory => new Model.OrderDetails(){
-                    Id = Orderhistory.Id,
-                    CustomerId = Orderhistory.CustomerId,
-                    StoreId = Orderhistory.StoresId,
-                    Date = Orderhistory.Date
-                }
+            Customer custToUpdate = new Customer()
+            {
+                Id = customerToUpdate.Id,
+                Name = customerToUpdate.Name
+
+            };
+            custToUpdate = _context.Customers.Update(custToUpdate).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Customer()
+            {
+                Id = custToUpdate.Id,
+                Name = custToUpdate.Name
+
+            };
+        }
+
+        public List<OrderDetails> OrderHistory(OrderDetails order1)
+        {
+            return _context.Orderitems.Where(order => order.StoreId == order1.StoreId).Select(Orderhistory => new OrderDetails()
+            {
+                Id = Orderhistory.Id,
+                CustomerId = Orderhistory.CustomerId,
+                StoreId = Orderhistory.StoreId,
+                Date = Orderhistory.Date
+            }
             ).ToList();
+        }
+        public Inventory createInventory(Inventory newInventory)
+        {
+            Inventory toAdd = new Inventory();
+            toAdd.Id = newInventory.Id;
+            toAdd.Quantity = newInventory.Quantity;
+            toAdd.StoresId = newInventory.StoresId;
+            toAdd.Product = newInventory.Product;
+            toAdd.Date = DateTime.Now;
+            _context.Inventories.Add(toAdd);
+            _context.SaveChanges();
+            return newInventory;
         }
         /// <summary>
         /// list of inventories in stores
         /// </summary>
         /// <returns></returns>
-        public List<Models.Inventory> GetInventory()
+
+        public List<Inventory> GetInventory()
         {
-            return _context.Inventories.Where(order => order.StoresId == Models.CurrentContext.CurrentStoreId).Select(Orderhistory => new Model.Inventory(){
-                    Id = Orderhistory.Id,
-                    Quantity = Orderhistory.Quantity,
-                    StoresId = Orderhistory.StoresId,
-                    ProductId = Orderhistory.ProductId,
-                    Date = Orderhistory.Date
+            return _context.Inventories.Select(
+                inventories => new Inventory()
+            {
+                Id = inventories.Id,
+                Quantity = inventories.Quantity,
+                StoresId = inventories.StoresId,
+                Product = inventories.Product,
+                Date = inventories.Date
+            }
+            ).ToList();
+        }
+        public Inventory GetOneInventoryById(int id)
+        {
+            return _context.Inventories
+                .AsNoTracking()
+                .FirstOrDefault(r => r.Id == id);
+        }
+        public List<Inventory> GetInventorybyStoreId(int id)
+        {
+            return _context.Inventories.Where(thisStore => thisStore.StoresId == id).Select(
+                inventories => new Inventory()
+                {
+                    Id = inventories.Id,
+                    Quantity = inventories.Quantity,
+                    StoresId = inventories.StoresId,
+                    Product = inventories.Product,
+                    Date = inventories.Date
                 }
             ).ToList();
         }
@@ -145,12 +218,12 @@ namespace DL
         /// </summary>
         /// <param name="quantity"></param>
         /// <returns></returns>
-        public Models.Inventory UpdateInventory(Models.Inventory quantity)
+        public Inventory UpdateInventory(Inventory quantity)
         {
-            Entity.Inventory toAdd = new Entity.Inventory();
+            Inventory toAdd = new Inventory();
             toAdd.Id = quantity.Id;
             toAdd.Quantity = quantity.Quantity;
-            toAdd.ProductId = quantity.ProductId;
+            toAdd.Product = quantity.Product;
             toAdd.StoresId = quantity.StoresId;
             toAdd.Date = quantity.Date;
             _context.Inventories.Update(toAdd);
@@ -162,26 +235,27 @@ namespace DL
         /// list of customer orders
         /// </summary>
         /// <returns></returns>
-        public List<Models.OrderDetails> CustomerOrderHistory()
+        public List<OrderDetails> CustomerOrderHistory(OrderDetails order1)
         {
-             return _context.Orderitems.Where(order => order.CustomerId == Models.CurrentContext.CurrentCustomerId).Select(Orderhistory => new Model.OrderDetails(){
-                    Id = Orderhistory.Id,
-                    CustomerId = Orderhistory.CustomerId,
-                    StoreId = Orderhistory.StoresId,
-                    Date = Orderhistory.Date
-                }
-            ).ToList();
+            return _context.Orderitems.Where(order => order.CustomerId == order1.CustomerId).Select(Orderhistory => new OrderDetails()
+            {
+                Id = Orderhistory.Id,
+                CustomerId = Orderhistory.CustomerId,
+                StoreId = Orderhistory.StoreId,
+                Date = Orderhistory.Date
+            }
+           ).ToList();
         }
         /// <summary>
         /// product id, quantity, and order id when a purchase is being made
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public Model.LineItem CheckOutList(Models.LineItem item)
+        public LineItem CheckOutList(LineItem item)
         {
-            Entity.LineItem toAdd = new Entity.LineItem();
+            LineItem toAdd = new LineItem();
             toAdd.Quantity = item.Quantity;
-            toAdd.ProductId = item.ProductId;
+            toAdd.Product = item.Product;
             toAdd.OrderitemsId = item.OrderitemsId;
             toAdd = _context.LineItems.Add(toAdd).Entity;
             _context.SaveChanges();
@@ -193,11 +267,11 @@ namespace DL
         /// </summary>
         /// <param name="quantity"></param>
         /// <returns></returns>
-        public Models.Inventory WhatsInStock(Models.Inventory quantity)
+        public Inventory WhatsInStock(Inventory quantity)
         {
-            Entity.Inventory toAdd = new Entity.Inventory();
+            Inventory toAdd = new Inventory();
             toAdd.Quantity = quantity.Quantity;
-            toAdd.ProductId = quantity.ProductId;
+            toAdd.Product = quantity.Product;
             toAdd.StoresId = quantity.StoresId;
             toAdd.Date = quantity.Date;
             toAdd = _context.Inventories.Add(toAdd).Entity;
@@ -209,18 +283,48 @@ namespace DL
         /// list of products
         /// </summary>
         /// <returns></returns>
-
-        public List<Models.Product> ListOfProducts()
+        public Customer GetOneCustomerById(int id)
+        {
+            return _context.Customers
+                .AsNoTracking()
+                .FirstOrDefault(r => r.Id == id);
+        }
+        public List<Product> ListOfProducts()
         {
             return _context.Products.Select(
-                Product => new Model.Product() {
+                Product => new Product() {
     
                     Name = Product.Name,
-                    Price = Product.Price
-                    
+                    Price = Product.Price,
+                    Id = Product.Id
                 }
             ).ToList();
 
+        }
+        public Product createProduct(Product newProduct)
+        {
+            newProduct = _context.Add(newProduct).Entity;
+            _context.SaveChanges();
+            return newProduct;
+        }
+        public Product GetOneProductById(int id)
+        {
+            return _context.Products
+                .AsNoTracking()
+                .FirstOrDefault(r => r.Id == id);
+        }
+
+        public void RemoveProduct(int id)
+        {
+            _context.Products.Remove(GetOneProductById(id));
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+        }
+        public void RemoveInventory(int id)
+        {
+            _context.Inventories.Remove(GetOneInventoryById(id));
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
         }
     }
 }

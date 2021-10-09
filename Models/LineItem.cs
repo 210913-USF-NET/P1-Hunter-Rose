@@ -11,15 +11,15 @@ namespace Models
 
         public int Id {get; set;}
 
-        public int? Quantity {get; set;}
+        public int Quantity {get; set;}
 
-        public int? ProductId {get; set;}
+        public string Product {get; set;}
 
-        public int? OrderitemsId {get; set;}
+        public int OrderitemsId {get; set;}
 
          public override string ToString()
         {
-            return $"Order Number: {OrderitemsId}, Product: {this.ProductId}, Quantity: {this.Quantity}";
+            return $"Order Number: {OrderitemsId}, Product: {this.Product}, Quantity: {this.Quantity}";
         }
     }
 }

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of products</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <img src="https://img.hatshopping.com/Champion-Baseball-Cap-blue.92719_rf2.jpg" width="300" height="300" alt="My Pic">
+</p>
+<p>
+    <img src="https://partycity6.scene7.com/is/image/PartyCity/_pdp_sq_?$_500x500_$&$product=PartyCity/890258" width="300" height="300" alt="My Pic">
+</p>
+<p>
+    <img src="https://m.media-amazon.com/images/I/41WVEmruzwL._AC_.jpg" width="300" height="300" alt="My Pic">
+</p>

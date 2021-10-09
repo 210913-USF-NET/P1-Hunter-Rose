@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Models.LineItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Receipt</h1>
+
+<p>
+    <a asp-action="Home">Home</a>
+</p>
+<button onclick="showCookies()">Click to see your receipt</button>
+
+<div>
+    <code id="cookies"></code>
+</div>
+<script>
+    function showCookies() {
+        const output = document.getElementById('cookies')
+        output.textContent = ' ' + document.cookie
+    }
+</script>
