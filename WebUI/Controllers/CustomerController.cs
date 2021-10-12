@@ -82,12 +82,16 @@ namespace WebUI.Controllers
             {
                 HttpContext.Response.Cookies.Append("user_id", foundCustomer.Id.ToString());
                 HttpContext.Response.Cookies.Append("Customer", foundCustomer.Name.ToString());
+                TempData["Username"] = customer.Name;
+                TempData.Keep("Username");
                 return RedirectToAction("Index", "Store");
             }
             else if(foundCustomer != null)
             {
                 HttpContext.Response.Cookies.Append("user_id", foundCustomer.Id.ToString());
                 HttpContext.Response.Cookies.Append("Customer", foundCustomer.Name.ToString());
+                TempData["Username"] = customer.Name;
+                TempData.Keep("Username");
                 return RedirectToAction("Index", "OrderDetails");
             }
             else

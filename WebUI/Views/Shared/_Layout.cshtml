@@ -18,18 +18,33 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="SignIn">Sign In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="OrderDetails" asp-action="Index">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="LogOut">Logout</a>
-                        </li>
+                        @if (TempData["Username"] != null && (string)TempData["Username"] != "AdminLogin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="OrderDetails" asp-action="Index">Shop</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="LogOut">Logout</a>
+                            </li>
+                        }
+                        else if (TempData["Username"] != null && (string)TempData["Username"] == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index">Store List</a>
+                            </li>
+                        }
+            else
+            {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="SignIn">Sign In</a>
+                    </li>
+            }
                     </ul>
                 </div>
             </div>
