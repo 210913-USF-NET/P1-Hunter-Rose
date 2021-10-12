@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 using BL;
 using Models;
 using DL;
+using Serilog;
+using System.Web.Providers.Entities;
 
 namespace WebUI.Controllers
 {
     public class CustomerController : Controller
     {
+     
         private IBL _bl;
         public CustomerController(IBL bl)
         {
@@ -20,6 +23,8 @@ namespace WebUI.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
+            string customer = HttpContext.Request.Cookies["Customer"];
+            Log.Information($"{customer} is looking at the list of customers");
             List<Customer> allCustomers = _bl.ListOfCustomers();
             return View(allCustomers);
         }
@@ -46,6 +51,7 @@ namespace WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Customer customer)
         {
+            Log.Information("New user signing up");
             try
             {
                 if(ModelState.IsValid)
@@ -70,9 +76,12 @@ namespace WebUI.Controllers
         public ActionResult SignIn(Customer customer)
         {
             Customer foundCustomer = _bl.SearchCustomer(customer);
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Console().WriteTo.File("../WebUI/logs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
+            Log.Information($"{foundCustomer.Name} signing in");
             if (foundCustomer?.Name == "AdminLogin")
             {
                 HttpContext.Response.Cookies.Append("user_id", foundCustomer.Id.ToString());
+                HttpContext.Response.Cookies.Append("Customer", foundCustomer.Name.ToString());
                 return RedirectToAction("Index", "Store");
             }
             else if(foundCustomer != null)
@@ -83,12 +92,16 @@ namespace WebUI.Controllers
             }
             else
             {
-            
                 return View();
             }
         }
-
-        // GET: CustomerController/Edit/5
+       
+        public ActionResult LogOut()
+        {
+            return View();
+        }
+       
+        //GET: CustomerController/Edit/5
         public ActionResult Edit(int id)
         {
             return View(new Customer(_bl.GetOneCustomerById(id)));

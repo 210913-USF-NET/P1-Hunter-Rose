@@ -1,0 +1,5 @@
+2021-10-112021-10-112021-10-112021-10-112021-10-112021-10-112021-10-112021-10-11 16:15:23.149 -04:00 [INF] Application starting..
+2021-10-11 16:15:23.213 -04:00 [INF] Application closing..
+2021-10-11 16:16:05.284 -04:00 [INF] Application starting..
+2021-10-11 16:16:05.347 -04:00 [INF] Application closing..
+2021-10-11 16:35:16.944 -04:00 [INF] Application starting..

@@ -1,0 +1,3 @@
+2021-10-12 12:23:33.612 -04:00 [INF] Hunter signing in
+2021-10-12 12:23:54.262 -04:00 [INF] Hunter chose store 1
+2021-10-12 12:24:25.480 -04:00 [INF] Hunter purchased 5 Straw Hat for 75

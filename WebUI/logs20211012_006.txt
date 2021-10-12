@@ -1,0 +1,5 @@
+2021-10-12 13:03:27.417 -04:00 [INF] AdminLogin signing in
+2021-10-12 13:03:29.971 -04:00 [INF] AdminLogin is looking at the list of customers
+2021-10-12 13:03:32.480 -04:00 [INF] AdminLogin is looking at the order history of customer 1
+2021-10-12 13:03:38.312 -04:00 [INF] AdminLogin is looking at the order history of store 2
+2021-10-12 13:21:30.162 -04:00 [INF] Application starting..

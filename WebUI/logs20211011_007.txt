@@ -1,0 +1,4 @@
+2021-10-11 16:46:38.784 -04:00 [INF] AdminLogin signing in
+2021-10-11 16:46:44.614 -04:00 [INF] Hunter is looking at the list of customers
+2021-10-11 16:46:47.827 -04:00 [INF] Hunter is looking at the order history of customer 2
+2021-10-11 16:46:55.731 -04:00 [INF] Hunter is looking at the order history of store 2

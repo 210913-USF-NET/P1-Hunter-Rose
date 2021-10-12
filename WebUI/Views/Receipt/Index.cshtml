@@ -5,18 +5,36 @@
 }
 
 <h1>Receipt</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-<p>
-    <a asp-action="Home">Home</a>
-</p>
-<button onclick="showCookies()">Click to see your receipt</button>
-
-<div>
-    <code id="cookies"></code>
-</div>
-<script>
-    function showCookies() {
-        const output = document.getElementById('cookies')
-        output.textContent = ' ' + document.cookie
+<body>
+    @foreach (var item in Model)
+    {
+    <p>Your total is $@Html.DisplayFor(modelItem => item.total) </p>
     }
-</script>
+</body>

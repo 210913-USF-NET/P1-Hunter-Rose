@@ -1,0 +1,3 @@
+2021-10-12 13:03:15.031 -04:00 [INF] Scrumlord Bao signing in
+2021-10-12 13:03:16.833 -04:00 [INF] Scrumlord Bao chose store location Conway, SC
+2021-10-12 13:03:22.821 -04:00 [INF] Scrumlord Bao purchased 400 Cowboy Hat(s) for $10000

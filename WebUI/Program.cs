@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
+
 
 namespace WebUI
 {
@@ -13,6 +15,8 @@ namespace WebUI
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Console().WriteTo.File("../WebUI/logs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
+            Log.Information("Application starting..");
             CreateHostBuilder(args).Build().Run();
         }
 

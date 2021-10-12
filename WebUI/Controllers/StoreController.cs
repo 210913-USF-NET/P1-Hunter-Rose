@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BL;
 using Models;
 using DL;
+using Serilog;
 
 namespace WebUI.Controllers
 {
@@ -54,6 +55,8 @@ namespace WebUI.Controllers
                 if (ModelState.IsValid)
                 {
                     _bl.createStore(store);
+                    string customer = HttpContext.Request.Cookies["Customer"];
+                    Log.Information($"{customer} created {store.Name} at location {store.Location}");
                     return RedirectToAction(nameof(Index));
                 }
                 return View();

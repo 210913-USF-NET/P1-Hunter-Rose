@@ -14,6 +14,7 @@ namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
+
         private IBL _bl;
         public HomeController(IBL bl)
         {

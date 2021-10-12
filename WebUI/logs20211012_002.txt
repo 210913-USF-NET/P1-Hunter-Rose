@@ -1,0 +1,5 @@
+2021-10-12 12:25:01.753 -04:00 [INF] AdminLogin signing in
+2021-10-12 12:25:23.826 -04:00 [INF] Hunter chose store 2
+2021-10-12 12:25:32.381 -04:00 [INF] Hunter purchased 3 Cowboy Hat for 75
+2021-10-12 12:25:54.296 -04:00 [INF] Hunter chose store 3
+2021-10-12 12:26:02.942 -04:00 [INF] Hunter purchased 80 Baseball Cap for 800

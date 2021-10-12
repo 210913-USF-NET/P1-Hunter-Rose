@@ -3,17 +3,26 @@
 @{
     ViewData["Title"] = "SignIn";
 }
+    <h1 style="color: white;">Sign in</h1>
 
-<h1>Sign in</h1>
+    <h4 style="color: white;">Username</h4>
 
-<h4>Username</h4>
 <hr />
+<style>
+    body {
+        background-image: url("https://c.tenor.com/bHGUqVIKzhoAAAAC/let-me-in-eric-andre.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+        background-size: cover;
+    }
+</style>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="SignIn">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label style="color:white;"asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
@@ -23,10 +32,10 @@
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-<div>
-    <a asp-action="Create">Sign up</a>
-</div>
+    <div>
+        <a style="color:white;"asp-action="Index">Back to List</a>
+    </div>
+    <br />
+    <div>
+        <a style="color:white;"asp-action="Create">Sign up</a>
+    </div>

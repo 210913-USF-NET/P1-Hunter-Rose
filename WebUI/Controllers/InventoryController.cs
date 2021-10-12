@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BL;
 using Models;
 using DL;
+using Serilog;
 
 namespace WebUI.Controllers
 {
@@ -38,6 +39,16 @@ namespace WebUI.Controllers
 
         public ActionResult newOrder(int id)
         {
+            List<Stores> store = _bl.StoreLocation();
+            for(int i = 0; i <store.Count; i++)
+            {
+                if(id == store[i].Id)
+                {
+                    string location = store[i].Location;
+                    string customer = HttpContext.Request.Cookies["Customer"];
+                    Log.Information($"{customer} chose store location {location}");
+                }
+            }
             List<Inventory> allInventories = _bl.GetInventorybyStoreId(id);
             return View(allInventories);
         }
@@ -78,22 +89,27 @@ namespace WebUI.Controllers
         {
             Inventory purchase = _bl.GetOneInventoryById(id);
             purchase.Quantity = purchase.Quantity - inventory.Quantity;
-                    HttpContext.Response.Cookies.Append("store_id", purchase.StoresId.ToString());
-                    HttpContext.Response.Cookies.Append("quantity", inventory.Quantity.ToString());
-                    HttpContext.Response.Cookies.Append("product", purchase.Product.ToString());
-                    _bl.UpdateInventory(purchase);
-                    List<Product> productlist = _bl.ListOfProducts();
-                    for (int i = 0; i < productlist.Count; i++)
-                    {
-                        if (purchase.Product == productlist[i].Name)
-                        {
-                            int total = productlist[i].Price * inventory.Quantity;
-                            HttpContext.Response.Cookies.Append("total_cost", total.ToString());
-                        }
-                    }
-                    return RedirectToAction("Create", "OrderDetails");
+                HttpContext.Response.Cookies.Append("store_id", purchase.StoresId.ToString());
+                HttpContext.Response.Cookies.Append("quantity", inventory.Quantity.ToString());
+                HttpContext.Response.Cookies.Append("product", purchase.Product.ToString());
+            if (purchase.Quantity < 0)
+            {
+                ModelState.AddModelError("Quantity", "You cannot buy more than we have. Please select a different quantity.");
+                return View();
+            }
+            List<Product> productlist = _bl.ListOfProducts();
+            for (int i = 0; i < productlist.Count; i++)
+            {
+                if (purchase.Product == productlist[i].Name)
+                {
+                    int total = productlist[i].Price * inventory.Quantity;
+                    HttpContext.Response.Cookies.Append("total_cost", total.ToString());
+                }
+            }
+            _bl.UpdateInventory(purchase);
+            return RedirectToAction("Create", "OrderDetails");
         }
-
+        [HttpGet]
         // GET: InventoryController/Edit/5
         public ActionResult Edit(int id)
         {
@@ -110,9 +126,9 @@ namespace WebUI.Controllers
                 if (ModelState.IsValid)
                 {
                     _bl.UpdateInventory(inventory);
-                    return RedirectToAction(nameof(StoreIndex));
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Edit));
+                return RedirectToAction("Index", "Inventory");
             }
             catch
             {

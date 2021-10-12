@@ -1,0 +1,3 @@
+2021-10-12 13:25:59.031 -04:00 [INF] AdminLogin signing in
+2021-10-12 13:26:00.576 -04:00 [INF] AdminLogin is looking at the order history of store location Charlotte, NC
+2021-10-12 13:34:53.981 -04:00 [INF] Application starting..

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using BL;
 using Models;
 using DL;
+using Serilog;
 
 namespace WebUI.Controllers
 {
     public class ReceiptController : Controller
     {
-        new LineItem receipt = new LineItem();
-        new Product totalcost = new Product();
+         LineItem receipt = new LineItem();
+         Product totalcost = new Product();
         private IBL _bl;
             public ReceiptController(IBL bl)
             {
@@ -22,10 +23,16 @@ namespace WebUI.Controllers
             // GET: ReceiptController
             public ActionResult Index()
         {
-            totalcost.Price = int.Parse(HttpContext.Request.Cookies["total_cost"]);
             receipt.Product = HttpContext.Request.Cookies["product"];
             receipt.Quantity = int.Parse(HttpContext.Request.Cookies["quantity"]);
-            return View();
+            receipt.OrderitemsId = int.Parse(HttpContext.Request.Cookies["order_id"]);
+            receipt.total = int.Parse(HttpContext.Request.Cookies["total_cost"]);
+            _bl.CheckOutList(receipt);
+            HttpContext.Response.Cookies.Append("lineitem_id", receipt.Id.ToString());
+            List<LineItem> customerReceipt = _bl.GetOneLineitemById(receipt.Id);
+            string customer = HttpContext.Request.Cookies["Customer"];
+            Log.Information($"{customer} purchased {receipt.Quantity} {receipt.Product}(s) for ${receipt.total}");
+            return View(customerReceipt);
         }
         public ActionResult Home()
         {

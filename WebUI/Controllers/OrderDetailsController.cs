@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BL;
 using Models;
 using DL;
+using Serilog;
 
 namespace WebUI.Controllers
 {
@@ -30,11 +31,31 @@ namespace WebUI.Controllers
         }
         public ActionResult OrderHistoryOfStore(OrderDetails order)
         {
+            string customer = HttpContext.Request.Cookies["Customer"];
+            List<Stores> store = _bl.StoreLocation();
+            for (int i = 0; i < store.Count; i++)
+            {
+                if (order.StoreId == store[i].Id)
+                {
+                    string location = store[i].Location;
+                    Log.Information($"{customer} is looking at the order history of store location {location}");
+                }
+            }
             List<OrderDetails> allOrders = _bl.OrderHistory(order);
             return View(allOrders);
         }
         public ActionResult OrderHistoryOfCustomer(OrderDetails order)
         {
+            string customer = HttpContext.Request.Cookies["Customer"];
+            List<Customer> history = _bl.ListOfCustomers();
+            for (int i = 0; i < history.Count; i++)
+            {
+                if (order.CustomerId == history[i].Id)
+                {
+                    string Name = history[i].Name;
+                    Log.Information($"{customer} is looking at the order history of Customer: {Name}");
+                }
+            }
             List<OrderDetails> allOrders = _bl.CustomerOrderHistory(order);
             return View(allOrders);
         }
@@ -51,21 +72,14 @@ namespace WebUI.Controllers
             OrderDetails newOrder = new OrderDetails();
             newOrder.CustomerId = int.Parse(HttpContext.Request.Cookies["user_id"]);
             newOrder.StoreId = int.Parse(HttpContext.Request.Cookies["store_id"]);
-            return View(newOrder);
+            _bl.CreateNewOrder(newOrder);
+            HttpContext.Response.Cookies.Append("order_id", newOrder.Id.ToString());
+            return RedirectToAction("Index", "Receipt");
         }
 
         // POST: OrderDetailsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OrderDetails order)
-        {
-            order.CustomerId = int.Parse(HttpContext.Request.Cookies["user_id"]);
-            order.StoreId = int.Parse(HttpContext.Request.Cookies["store_id"]);
-            _bl.CreateNewOrder(order);
-                    return RedirectToAction("Index", "Receipt");
-               
-       
-        }
 
         // GET: OrderDetailsController/Edit/5
         public ActionResult Edit(int id)

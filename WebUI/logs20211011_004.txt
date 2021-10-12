@@ -1,0 +1,2 @@
+2021-10-11 16:35:27.051 -04:00 [INF] Hunter purchased 3 Cowboy Hat for 75
+2021-10-11 16:38:17.180 -04:00 [INF] Application starting..
