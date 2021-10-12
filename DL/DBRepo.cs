@@ -257,10 +257,24 @@ namespace DL
             toAdd.Quantity = item.Quantity;
             toAdd.Product = item.Product;
             toAdd.OrderitemsId = item.OrderitemsId;
+            toAdd.total = item.total;
             toAdd = _context.LineItems.Add(toAdd).Entity;
             _context.SaveChanges();
             item.Id = toAdd.Id;
             return item;
+        }
+        public List<LineItem> GetOneLineitemById(int id)
+        {
+            return _context.LineItems.Where(thisStore => thisStore.Id == id).Select(
+                receipt => new LineItem()
+                {
+                    Id = receipt.Id,
+                    Quantity = receipt.Quantity,
+                    Product = receipt.Product,
+                    total = receipt.total,
+                    OrderitemsId = receipt.OrderitemsId
+                }
+            ).ToList();
         }
         /// <summary>
         /// lists quantity of products

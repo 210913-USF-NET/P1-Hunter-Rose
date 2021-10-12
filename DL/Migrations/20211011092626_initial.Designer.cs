@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DL.Migrations
 {
     [DbContext(typeof(HFMPBDBContext))]
-    [Migration("20211008210746_initial")]
+    [Migration("20211011092626_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,9 @@ namespace DL.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("total")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");

@@ -32,5 +32,7 @@ namespace BL
         public void RemoveCustomer(int id);
         OrderDetails CreateNewOrder(OrderDetails order);
         public void RemoveInventory(int id);
+        LineItem CheckOutList(LineItem item);
+        List<LineItem> GetOneLineitemById(int id);
     }
 }

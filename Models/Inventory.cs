@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
@@ -17,7 +18,6 @@ namespace Models
             this.Product = what.Product;
             this.Date = what.Date;
         }
-
         public Inventory(int id) : this()
         {
             this.Id = id;

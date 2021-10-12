@@ -4,3 +4,4 @@
 2021-10-12 13:41:24.117 -04:00 [INF] AdminLogin is looking at the list of customers
 2021-10-12 13:41:25.498 -04:00 [INF] AdminLogin is looking at the order history of Customer: Scrumlord Bao
 2021-10-12 13:49:52.841 -04:00 [INF] Application starting..
+2021-10-12 14:51:55.600 -04:00 [INF] Application starting..

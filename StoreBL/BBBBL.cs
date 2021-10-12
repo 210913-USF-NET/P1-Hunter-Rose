@@ -33,6 +33,8 @@ namespace BL
         public Customer SearchCustomer(Customer searchCustomer) { return _repo.SearchCustomer(searchCustomer); }
         public OrderDetails CreateNewOrder(OrderDetails order) { return _repo.CreateNewOrder(order); }
         public void RemoveInventory(int id) { _repo.RemoveInventory(id); }
+        public LineItem CheckOutList(LineItem item) { return _repo.CheckOutList(item); }
+        public List<LineItem> GetOneLineitemById(int id) { return _repo.GetOneLineitemById(id); }
         public BBBBL(IRepo irepo){
              _repo = irepo;
             

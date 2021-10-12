@@ -50,6 +50,7 @@ namespace DL.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
+                    total = table.Column<int>(type: "integer", nullable: false),
                     Product = table.Column<string>(type: "text", nullable: true),
                     OrderitemsId = table.Column<int>(type: "integer", nullable: false)
                 },
