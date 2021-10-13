@@ -4,42 +4,53 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Select a store near you</h1>
-
+<h1 style="color:white;">Select a store near you</h1>
+<style>
+    body {
+        background-image: url("https://c.tenor.com/-3Zcltg-fpgAAAAM/bald-we-live-hockey.gif");
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+        background-size: cover;
+    }
+</style>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th style="color:white;">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th style="color:white;">
                 @Html.DisplayNameFor(model => model.Location)
             </th>
-            <th>
+            <th style="display:none;">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Select", "newOrder", "Inventory", new { id = item.Id }) 
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="color:white;">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td style="color:white;">
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td style="display:none;">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td style="color:white;">
+                    @Html.ActionLink("Select", "newOrder", "Inventory", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-<p>
-    <img src="https://c.tenor.com/-3Zcltg-fpgAAAAM/bald-we-live-hockey.gif" width="1000" height="500" alt="My Pic">
-</p>
+<div style="height:100%; width:100%;">
+
+    <img src="https://lh3.googleusercontent.com/go9yNqQt_phxblk7TG-5Q3WVXRjcruj9fekszBV-5RFegopxAwzlUxuMLieznXn_LhDbnQ=s136" style="position:absolute; float:right; right:0px; bottom:0px; z-index:2;">
+
+</div>

@@ -1,3 +1,0 @@
-2021-10-12 13:21:34.834 -04:00 [INF] AdminLogin signing in
-2021-10-12 13:21:43.511 -04:00 [INF] AdminLogin is looking at the list of customers
-2021-10-12 13:23:13.863 -04:00 [INF] Application starting..

@@ -1,0 +1,4 @@
+2021-10-12 22:30:05.688 -04:00 [INF] Taylor signing in
+2021-10-12 22:30:07.093 -04:00 [INF] Taylor chose store location Charlotte, NC
+2021-10-12 22:30:14.301 -04:00 [INF] Taylor purchased 50 Straw Hat(s) for $600
+2021-10-12 22:35:15.395 -04:00 [INF] Application starting..

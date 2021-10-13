@@ -1,2 +1,0 @@
-2021-10-12 12:26:22.201 -04:00 [INF] AdminLogin signing in
-2021-10-12 13:02:31.939 -04:00 [INF] Application starting..

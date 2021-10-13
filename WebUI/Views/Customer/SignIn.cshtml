@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "SignIn";
 }
-    <h1 style="color: white;">Sign in</h1>
+<h1 style="color: white;">Sign in</h1>
 
-    <h4 style="color: white;">Username</h4>
+<h4 style="color: white;">Username</h4>
 
 <hr />
 <style>
@@ -22,7 +22,7 @@
         <form asp-action="SignIn">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label style="color:white;"asp-for="Name" class="control-label"></label>
+                <label style="color:white;" asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
@@ -32,10 +32,13 @@
         </form>
     </div>
 </div>
-    <div>
-        <a style="color:white;"asp-action="Index">Back to List</a>
-    </div>
-    <br />
-    <div>
-        <a style="color:white;"asp-action="Create">Sign up</a>
-    </div>
+<div>
+    <a asp-action="Create">Sign Up</a>
+</div>
+<br />
+
+<div style="height:100%; width:100%;">
+
+<img src="https://lh3.googleusercontent.com/go9yNqQt_phxblk7TG-5Q3WVXRjcruj9fekszBV-5RFegopxAwzlUxuMLieznXn_LhDbnQ=s136" style="position:absolute; float:right; right:0px; bottom:0px; z-index:2;">
+
+</div>

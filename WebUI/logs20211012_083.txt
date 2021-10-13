@@ -1,0 +1,2 @@
+2021-10-12 22:15:16.233 -04:00 [INF] Hunter signing in
+2021-10-12 22:15:45.268 -04:00 [INF] Application starting..

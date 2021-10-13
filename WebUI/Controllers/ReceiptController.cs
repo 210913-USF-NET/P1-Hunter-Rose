@@ -32,6 +32,11 @@ namespace WebUI.Controllers
             List<LineItem> customerReceipt = _bl.GetOneLineitemById(receipt.Id);
             string customer = HttpContext.Request.Cookies["Customer"];
             Log.Information($"{customer} purchased {receipt.Quantity} {receipt.Product}(s) for ${receipt.total}");
+            if (HttpContext.Request.Cookies["Coupon"] != null)
+            {
+                TempData["Savings"] = int.Parse(HttpContext.Request.Cookies["plswork"]) / 5;
+                TempData.Keep("Savings");
+            }
             return View(customerReceipt);
         }
         public ActionResult Home()

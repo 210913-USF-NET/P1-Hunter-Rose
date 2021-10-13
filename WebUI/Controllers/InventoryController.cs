@@ -25,6 +25,15 @@ namespace WebUI.Controllers
             List<Inventory> allInventories = _bl.GetInventory();
             return View(allInventories);
         }
+        [HttpPost]
+        public ActionResult Coupon(string coupon)
+        {
+            double coup1 = .8;
+            TempData["Coupon"] = ".8";
+            TempData.Keep("Coupon");
+            HttpContext.Response.Cookies.Append("Coupon", coup1.ToString());
+            return new EmptyResult();
+        }
         public ActionResult Store()
         {
             return RedirectToAction("Index", "Store");
@@ -102,8 +111,20 @@ namespace WebUI.Controllers
             {
                 if (purchase.Product == productlist[i].Name)
                 {
-                    int total = productlist[i].Price * inventory.Quantity;
-                    HttpContext.Response.Cookies.Append("total_cost", total.ToString());
+                    double total = productlist[i].Price * inventory.Quantity;
+                    HttpContext.Response.Cookies.Append("plswork", total.ToString());
+                    if (HttpContext.Request.Cookies["Coupon"] != null)
+                    {
+                        double coupon = double.Parse(HttpContext.Request.Cookies["Coupon"]);
+                        total = total * coupon;
+                        HttpContext.Response.Cookies.Append("total_cost", total.ToString());
+                    }
+                    else
+                    {
+                        TempData["Savings"] = 0;
+                        TempData.Keep("Savings");
+                        HttpContext.Response.Cookies.Append("total_cost", total.ToString());
+                    }
                 }
             }
             _bl.UpdateInventory(purchase);

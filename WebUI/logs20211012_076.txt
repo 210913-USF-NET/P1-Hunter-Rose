@@ -1,0 +1,4 @@
+2021-10-12 22:03:22.471 -04:00 [INF] tenzin signing in
+2021-10-12 22:03:23.861 -04:00 [INF] tenzin chose store location Las Vegas, NV
+2021-10-12 22:03:35.413 -04:00 [INF] tenzin purchased 45 Cowboy Hat(s) for $900
+2021-10-12 22:04:04.754 -04:00 [INF] Application starting..

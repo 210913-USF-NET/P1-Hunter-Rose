@@ -1,0 +1,5 @@
+2021-10-12 22:56:54.814 -04:00 [INF] Rick N Morty signing in
+2021-10-12 22:56:59.939 -04:00 [INF] Rick N Morty chose store location Charlotte, NC
+2021-10-12 22:57:07.847 -04:00 [INF] Rick N Morty purchased 4 Cowboy Hat(s) for $100
+2021-10-12 22:57:11.254 -04:00 [INF] Rick N Morty chose store location Charlotte, NC
+2021-10-12 22:57:18.685 -04:00 [INF] Rick N Morty purchased 4 Cowboy Hat(s) for $80

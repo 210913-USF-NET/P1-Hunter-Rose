@@ -45,7 +45,7 @@ namespace Tests
             Assert.Equal(2, model.Count());
         }
         [Fact]
-        public void CustomerControllerIndexShouldReturnListOfStores()
+        public void CustomerControllerIndexShouldReturnListOfCustomers()
         {
             var mockBL = new Mock<IBL>();
             mockBL.Setup(x => x.ListOfCustomers()).Returns(

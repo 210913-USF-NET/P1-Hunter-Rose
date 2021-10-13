@@ -9,19 +9,19 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th style="display:none;">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
-            <th>
+            <th style="display:none;">
                 @Html.DisplayNameFor(model => model.StoresId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product)
             </th>
-            <th>
+            <th style="display:none;">
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th></th>
@@ -30,19 +30,19 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td style="display:none;">
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            <td>
+            <td style="display:none;">
                 @Html.DisplayFor(modelItem => item.StoresId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Product)
             </td>
-            <td>
+            <td style="display:none;">
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
@@ -52,3 +52,11 @@
 }
     </tbody>
 </table>
+<div style="height:100%; width:100%;">
+
+    <img src="https://lh3.googleusercontent.com/go9yNqQt_phxblk7TG-5Q3WVXRjcruj9fekszBV-5RFegopxAwzlUxuMLieznXn_LhDbnQ=s136" style="position:absolute; float:right; right:0px; bottom:0px; z-index:2;">
+
+</div>
+<img src="https://lh3.googleusercontent.com/el9XwXHJ22oNkqAv5ByIvIFqF97ofzQCYplv0VICKrlWrdBpw1RK-nJ3p7oYDJhSaouPbQ=s151" />
+<img src="https://lh3.googleusercontent.com/JmoH4A0pOhk0vmBVjUyZwewu8TGHvVixcTbsqJCmmqYAm_lPH88p8PnVeA2XsWmyaE7lXA=s151" />
+<img src="https://lh3.googleusercontent.com/vAr9tAwKHGuOx9rglPknTj326e7TBP8kdqxDW9SunVssjXkJHlhM2fE3s3zJjEZY8iki=s151" />

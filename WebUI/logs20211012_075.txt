@@ -1,0 +1,5 @@
+2021-10-12 21:54:19.349 -04:00 [INF] Hunter signing in
+2021-10-12 21:54:20.725 -04:00 [INF] Hunter chose store location Las Vegas, NV
+2021-10-12 21:55:13.519 -04:00 [INF] Hunter purchased 40 Cowboy Hat(s) for $800
+2021-10-12 22:03:07.325 -04:00 [INF] Application starting..
+2021-10-12 22:03:18.990 -04:00 [INF] New user signing up

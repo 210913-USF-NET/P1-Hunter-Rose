@@ -23,8 +23,6 @@ namespace WebUI.Controllers
         // GET: CustomerController
         public ActionResult Index()
         {
-            string customer = HttpContext.Request.Cookies["Customer"];
-            Log.Information($"{customer} is looking at the list of customers");
             List<Customer> allCustomers = _bl.ListOfCustomers();
             return View(allCustomers);
         }
@@ -82,7 +80,7 @@ namespace WebUI.Controllers
             {
                 HttpContext.Response.Cookies.Append("user_id", foundCustomer.Id.ToString());
                 HttpContext.Response.Cookies.Append("Customer", foundCustomer.Name.ToString());
-                TempData["Username"] = customer.Name;
+                TempData["Username"] = foundCustomer.Name;
                 TempData.Keep("Username");
                 return RedirectToAction("Index", "Store");
             }
@@ -90,7 +88,7 @@ namespace WebUI.Controllers
             {
                 HttpContext.Response.Cookies.Append("user_id", foundCustomer.Id.ToString());
                 HttpContext.Response.Cookies.Append("Customer", foundCustomer.Name.ToString());
-                TempData["Username"] = customer.Name;
+                TempData["Username"] = foundCustomer.Name;
                 TempData.Keep("Username");
                 return RedirectToAction("Index", "OrderDetails");
             }
@@ -102,6 +100,7 @@ namespace WebUI.Controllers
        
         public ActionResult LogOut()
         {
+            TempData.Remove("Username");
             return View();
         }
        
