@@ -1,0 +1,6 @@
+2021-10-16 02:00:42.216 -04:00 [INF] Hunter signing in
+2021-10-16 02:00:43.706 -04:00 [INF] Hunter chose store location Charlotte, NC
+2021-10-16 02:00:52.398 -04:00 [INF] Hunter chose store location Las Vegas, NV
+2021-10-16 02:01:03.065 -04:00 [INF] Hunter purchased 0 (s) for $0
+2021-10-16 02:01:12.240 -04:00 [INF] Hunter chose store location Charlotte, NC
+2021-10-16 02:07:48.795 -04:00 [INF] Application starting..

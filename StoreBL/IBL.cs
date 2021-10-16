@@ -22,6 +22,7 @@ namespace BL
         List<Inventory> GetInventory();
         List<Inventory> GetInventorybyStoreId(int id);
         Inventory GetOneInventoryById(int id);
+        //void UpdateLineItem(int orderitemsId);
         Inventory UpdateInventory(Inventory quantity);
         List<Product> ListOfProducts();
         Product createProduct(Product newProduct);
@@ -32,7 +33,10 @@ namespace BL
         public void RemoveCustomer(int id);
         OrderDetails CreateNewOrder(OrderDetails order);
         public void RemoveInventory(int id);
-        LineItem CheckOutList(LineItem item);
-        List<LineItem> GetOneLineitemById(int id);
+        LineItem AddToCart(LineItem item);
+        LineItem GetOneLineitemById(int id);
+        public void DeleteCheckOut(int id);
+        public List<LineItem> CheckoutList(LineItem item);
+        public LineItem UpdateLineItem(LineItem item);
     }
 }

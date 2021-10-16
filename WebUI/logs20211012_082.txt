@@ -1,5 +1,0 @@
-2021-10-12 22:13:39.245 -04:00 [INF] Hunter signing in
-2021-10-12 22:13:40.683 -04:00 [INF] Hunter chose store location Las Vegas, NV
-2021-10-12 22:13:49.679 -04:00 [INF] Hunter purchased 8 Straw Hat(s) for $96
-2021-10-12 22:14:39.591 -04:00 [INF] Application starting..
-2021-10-12 22:15:09.635 -04:00 [INF] Application starting..

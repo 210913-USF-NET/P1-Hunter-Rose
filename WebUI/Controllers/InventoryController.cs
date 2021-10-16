@@ -112,6 +112,7 @@ namespace WebUI.Controllers
                 if (purchase.Product == productlist[i].Name)
                 {
                     double total = productlist[i].Price * inventory.Quantity;
+                    HttpContext.Response.Cookies.Append("price", productlist[i].Price.ToString());
                     HttpContext.Response.Cookies.Append("plswork", total.ToString());
                     if (HttpContext.Request.Cookies["Coupon"] != null)
                     {
@@ -128,9 +129,10 @@ namespace WebUI.Controllers
                 }
             }
             _bl.UpdateInventory(purchase);
-            return RedirectToAction("Create", "OrderDetails");
+            return RedirectToAction("Cart", "Receipt");
         }
         [HttpGet]
+
         // GET: InventoryController/Edit/5
         public ActionResult Edit(int id)
         {

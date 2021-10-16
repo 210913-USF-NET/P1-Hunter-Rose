@@ -14,6 +14,7 @@ namespace Models
         public int Quantity {get; set;}
         public int total { get; set; }
 
+        public int price { get; set; }
         public string Product {get; set;}
 
         public int OrderitemsId {get; set;}

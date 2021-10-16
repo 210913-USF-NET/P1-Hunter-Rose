@@ -18,5 +18,6 @@ namespace DL
         public DbSet<OrderDetails> Orderitems { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Stores> Stores { get; set; }
+        public DbSet<Stores> Cart { get; set; }
     }
 }

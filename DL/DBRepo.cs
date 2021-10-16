@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 //using Entity = DL.Entities;
 using Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DL
 {
@@ -71,6 +72,23 @@ namespace DL
             }
             return null;
         }
+
+        //public List<Cart> GetCheckOutList()
+        //{
+        //    return _context.Cart
+        //        .Select(
+        //        r => new Cart()
+        //        { 
+        //            Id = r.Id,
+        //            Item = r.Item,
+        //            Price = r.Price,
+        //            Quantity = r.Quantity,
+        //            Size = r.Size,
+        //            TotalPrice = r.TotalPrice,
+        //            CustomerId = r.CustomerId,
+        //            StoreId = r.StoreId
+        //        }).ToList();
+        //}
         /// <summary>
         /// creates a new order id when customer is purchasing items so the store can track it
         /// </summary>
@@ -251,30 +269,58 @@ namespace DL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public LineItem CheckOutList(LineItem item)
+        public LineItem AddToCart(LineItem item)
         {
             LineItem toAdd = new LineItem();
             toAdd.Quantity = item.Quantity;
             toAdd.Product = item.Product;
-            toAdd.OrderitemsId = item.OrderitemsId;
+            //toAdd.OrderitemsId = item.OrderitemsId;
             toAdd.total = item.total;
+            toAdd.price = item.price;
             toAdd = _context.LineItems.Add(toAdd).Entity;
             _context.SaveChanges();
             item.Id = toAdd.Id;
             return item;
         }
-        public List<LineItem> GetOneLineitemById(int id)
+        public void DeleteCheckOut(int id)
         {
-            return _context.LineItems.Where(thisStore => thisStore.Id == id).Select(
-                receipt => new LineItem()
+            _context.LineItems.Remove(GetOneLineitemById(id));
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+        }
+
+
+        public List<LineItem> CheckoutList(LineItem lineitem)
+        {
+            return _context.LineItems.Where(order => order.OrderitemsId == lineitem.OrderitemsId).Select(
+                cart => new LineItem()
                 {
-                    Id = receipt.Id,
-                    Quantity = receipt.Quantity,
-                    Product = receipt.Product,
-                    total = receipt.total,
-                    OrderitemsId = receipt.OrderitemsId
+                    Id = cart.Id,
+                    Quantity = cart.Quantity,
+                    price = cart.price,
+                    Product = cart.Product
                 }
             ).ToList();
+        }
+
+        public LineItem UpdateLineItem(LineItem item)
+        {
+            LineItem toAdd = new LineItem();
+            toAdd.Id = item.Id;
+            toAdd.Quantity = item.Quantity;
+            toAdd.Product = item.Product;
+            toAdd.OrderitemsId = item.OrderitemsId;
+            toAdd.price = item.price;
+            _context.LineItems.Update(toAdd);
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+            return item;
+        }
+        public LineItem GetOneLineitemById(int id)
+        {
+            return _context.LineItems
+                 .AsNoTracking()
+                 .FirstOrDefault(r => r.Id == id);
         }
         /// <summary>
         /// lists quantity of products

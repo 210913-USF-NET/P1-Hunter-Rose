@@ -75,6 +75,9 @@ namespace DL.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
 
+                    b.Property<int>("price")
+                        .HasColumnType("integer");
+
                     b.Property<int>("total")
                         .HasColumnType("integer");
 

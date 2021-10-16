@@ -21,6 +21,10 @@ namespace WebUI.Controllers
             _bl = bl;
         }
         // GET: CustomerController
+        /// <summary>
+        /// Gets customer List
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             List<Customer> allCustomers = _bl.ListOfCustomers();
@@ -43,6 +47,11 @@ namespace WebUI.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Creates customer
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
 
         // POST: CustomerController/Create
         [HttpPost]
@@ -69,6 +78,11 @@ namespace WebUI.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// Sign in page
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SignIn(Customer customer)
@@ -97,7 +111,10 @@ namespace WebUI.Controllers
                 return View();
             }
         }
-       
+       /// <summary>
+       /// clears temp data and redirects to sign in
+       /// </summary>
+       /// <returns></returns>
         public ActionResult LogOut()
         {
             TempData.Remove("Username");

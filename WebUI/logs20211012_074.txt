@@ -1,4 +1,0 @@
-2021-10-12 21:26:05.851 -04:00 [INF] Taylor signing in
-2021-10-12 21:26:11.243 -04:00 [INF] Taylor chose store location Las Vegas, NV
-2021-10-12 21:26:31.695 -04:00 [INF] Taylor purchased 44 Cowboy Hat(s) for $880
-2021-10-12 21:54:13.464 -04:00 [INF] Application starting..

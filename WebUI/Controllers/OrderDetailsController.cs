@@ -62,7 +62,10 @@ namespace WebUI.Controllers
         // GET: OrderDetailsController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            LineItem order1 = new LineItem();
+            order1.OrderitemsId = id;
+            List<LineItem> order = _bl.CheckoutList(order1);
+            return View(order);
         }
 
         // GET: OrderDetailsController/Create

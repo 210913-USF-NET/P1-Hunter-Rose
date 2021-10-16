@@ -1,0 +1,4 @@
+2021-10-16 01:56:28.304 -04:00 [INF] AdminLogin signing in
+2021-10-16 01:56:31.682 -04:00 [INF] AdminLogin is looking at the order history of store location Las Vegas, NV
+2021-10-16 01:56:40.937 -04:00 [INF] AdminLogin is looking at the order history of store location Charlotte, NC
+2021-10-16 01:56:43.364 -04:00 [INF] AdminLogin is looking at the order history of store location Las Vegas, NV

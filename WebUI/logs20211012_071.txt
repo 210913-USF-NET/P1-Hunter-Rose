@@ -1,3 +1,0 @@
-2021-10-12 21:18:04.828 -04:00 [INF] Rick N Morty signing in
-2021-10-12 21:18:06.552 -04:00 [INF] Rick N Morty chose store location Conway, SC
-2021-10-12 21:18:13.962 -04:00 [INF] Rick N Morty purchased 4999 Straw Hat(s) for $59988

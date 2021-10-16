@@ -18,68 +18,11 @@
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Checkout" class="btn btn-primary" />
+                <input type="submit" value="Add to cart" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-<div class="coupon">
-    <div class="container">
-        <h3>Hats For Male Pattern Baldness</h3>
-    </div>
-    <img src="https://lh3.googleusercontent.com/go9yNqQt_phxblk7TG-5Q3WVXRjcruj9fekszBV-5RFegopxAwzlUxuMLieznXn_LhDbnQ=s136" alt="Logo" style="width:100%;">
-    <div class="container" style="background-color:white">
-        <h2><b>20% OFF YOUR PURCHASE</b></h2>
-    </div>
-    <div class="container">
-        <p>Click the coupon button for 20% off your order! <span class="promo">Coupon ID: colorgradegreen</span></p>
-        <p class="expire">Expires: if released</p>
-    </div>
-</div>
-<style>
-    .coupon {
-        border: 5px dotted #bbb; /* Dotted border */
-        width: 80%;
-        border-radius: 15px; /* Rounded border */
-        margin: 0 auto; /* Center the coupon */
-        max-width: 600px;
-    }
-
-    .container {
-        padding: 2px 16px;
-        background-color: #f1f1f1;
-    }
-
-    .promo {
-        background: #ccc;
-        padding: 3px;
-    }
-
-    .expire {
-        color: red;
-    }
-</style>
-<body>
-    <input type="button" onclick="SetTempData()" value="colorgradegreen">
-    <hr />
-    @TempData["Coupon"]
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type='text/javascript'>
-        function SetTempData() {
-            $.ajax({
-                type: "POST",
-                url: '/Inventory/Coupon',
-                data: '{ value: ".8"}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "text",
-                success: function (r) {
-                    window.location = window.location.href;
-                }
-            });
-            alert("20% off next order");
-        }
-    </script>
-</body >
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

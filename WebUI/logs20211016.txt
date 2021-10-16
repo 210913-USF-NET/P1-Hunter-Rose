@@ -1,0 +1,1 @@
+2021-10-16 00:07:14.276 -04:00 [INF] Application starting..

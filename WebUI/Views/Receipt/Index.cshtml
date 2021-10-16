@@ -5,6 +5,7 @@
 }
 
 <h1>Receipt</h1>
+
 <table class="table">
     <thead>
         <tr>
@@ -14,33 +15,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.Product)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+        </tr>
         }
     </tbody>
 </table>
 
 <body>
-    @foreach (var item in Model)
-    {
-    <p>Your total is $@Html.DisplayFor(modelItem => item.total) </p>
-    <p>You saved $@TempData["Savings"]</p>
-    }
+    <p>Your total is $@TempData["total"] </p>
 </body>
-<div style="height:100%; width:100%;">
-
-    <img src="https://lh3.googleusercontent.com/go9yNqQt_phxblk7TG-5Q3WVXRjcruj9fekszBV-5RFegopxAwzlUxuMLieznXn_LhDbnQ=s136" style="position:absolute; float:right; right:0px; bottom:0px; z-index:2;">
-
-</div>

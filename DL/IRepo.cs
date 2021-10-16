@@ -30,8 +30,11 @@ namespace DL
         Customer GetOneCustomerById(int id);
         Customer UpdateCustomer(Customer customerToUpdate);
         void RemoveCustomer(int id);
-        LineItem CheckOutList(LineItem item);
-        List<LineItem> GetOneLineitemById(int id);
+        LineItem AddToCart(LineItem item);
+        public List<LineItem> CheckoutList(LineItem item);
+        LineItem GetOneLineitemById(int id);
         public void RemoveInventory(int id);
+        void DeleteCheckOut(int id);
+        public LineItem UpdateLineItem(LineItem item);
     }
 }

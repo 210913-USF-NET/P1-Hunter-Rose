@@ -23,13 +23,13 @@ namespace WebUI.Controllers
             // GET: ReceiptController
             public ActionResult Index()
         {
-            receipt.Product = HttpContext.Request.Cookies["product"];
-            receipt.Quantity = int.Parse(HttpContext.Request.Cookies["quantity"]);
-            receipt.OrderitemsId = int.Parse(HttpContext.Request.Cookies["order_id"]);
-            receipt.total = int.Parse(HttpContext.Request.Cookies["total_cost"]);
-            _bl.CheckOutList(receipt);
-            HttpContext.Response.Cookies.Append("lineitem_id", receipt.Id.ToString());
-            List<LineItem> customerReceipt = _bl.GetOneLineitemById(receipt.Id);
+            List<LineItem> whatsincart = _bl.CheckoutList(receipt);
+            foreach (LineItem item in whatsincart)
+            {
+                item.price = int.Parse(HttpContext.Request.Cookies["price"]);
+                item.OrderitemsId = int.Parse(HttpContext.Request.Cookies["order_id"]);
+                _bl.UpdateLineItem(item);
+            }
             string customer = HttpContext.Request.Cookies["Customer"];
             Log.Information($"{customer} purchased {receipt.Quantity} {receipt.Product}(s) for ${receipt.total}");
             if (HttpContext.Request.Cookies["Coupon"] != null)
@@ -37,7 +37,38 @@ namespace WebUI.Controllers
                 TempData["Savings"] = int.Parse(HttpContext.Request.Cookies["plswork"]) / 5;
                 TempData.Keep("Savings");
             }
-            return View(customerReceipt);
+            return View(whatsincart);
+        }
+
+        public ActionResult CheckOut()
+        {
+            return RedirectToAction("Create", "OrderDetails");
+        }
+        public ActionResult CartTotal()
+        {
+                List<LineItem> whatsincart = _bl.CheckoutList(receipt);
+                int total = 0;
+                for (int i = 0; i < whatsincart.Count(); i++)
+                {
+                    total += whatsincart[i].Quantity * whatsincart[i].price;
+                }
+            if (HttpContext.Request.Cookies["Coupon"] != null)
+            {
+                TempData["total"] = total * int.Parse(HttpContext.Request.Cookies["Coupon"]);
+            }
+            TempData["total"] = total;
+                TempData.Keep("total");
+                return View(whatsincart);
+        }
+        public ActionResult Cart()
+        {
+            receipt.Product = HttpContext.Request.Cookies["product"];
+            receipt.Quantity = int.Parse(HttpContext.Request.Cookies["quantity"]);
+            //receipt.OrderitemsId = int.Parse(HttpContext.Request.Cookies["order_id"]);
+            receipt.price = int.Parse(HttpContext.Request.Cookies["price"]);
+            //receipt.total = int.Parse(HttpContext.Request.Cookies["total_cost"]);
+            _bl.AddToCart(receipt);
+            return RedirectToAction("Index", "OrderDetails");
         }
         public ActionResult Home()
         {
@@ -91,26 +122,20 @@ namespace WebUI.Controllers
                 return View();
             }
         }
-
-        // GET: ReceiptController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
-
+        // GET: ReceiptController/Delete/5
         // POST: ReceiptController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
+                _bl.DeleteCheckOut(id);
+                return RedirectToAction(nameof(CartTotal));
+      
         }
     }
 }

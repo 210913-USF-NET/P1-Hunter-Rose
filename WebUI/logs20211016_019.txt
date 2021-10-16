@@ -1,0 +1,4 @@
+2021-10-16 01:53:39.650 -04:00 [INF] AdminLogin signing in
+2021-10-16 01:53:42.710 -04:00 [INF] AdminLogin is looking at the order history of Customer: Hunter
+2021-10-16 01:54:14.424 -04:00 [INF] AdminLogin is looking at the order history of Customer: Hunter
+2021-10-16 01:56:23.159 -04:00 [INF] Application starting..

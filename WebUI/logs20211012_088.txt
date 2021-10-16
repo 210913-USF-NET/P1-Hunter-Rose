@@ -1,3 +1,0 @@
-2021-10-12 22:35:20.509 -04:00 [INF] Hunter signing in
-2021-10-12 22:35:21.871 -04:00 [INF] Hunter chose store location Las Vegas, NV
-2021-10-12 22:36:12.723 -04:00 [INF] Application starting..
